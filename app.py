@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -6,6 +8,7 @@ from resource.User import Usersignup
 from resource.student import Student, StudentMarks, Display
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.secret_key = 'abcd'
 api = Api(app)
 
