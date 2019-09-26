@@ -13,11 +13,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'abcd'
 api = Api(app)
 
-
-@app.before_first_request
-def create_table():
-    db.create_all()
-
 jwt = JWT(app,authentication,identity) #/auth
 
 api.add_resource(Display,'/student')
