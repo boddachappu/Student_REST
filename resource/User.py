@@ -18,10 +18,12 @@ class Usersignup(Resource):
         data = Usersignup.parser.parse_args()
         if UserModel.get_user_by_name(data['username']):
             return {"message" : "User already exists please enter new username"}, 400
-        conn = sqlite3.connect('user.db')
-        cursor = conn.cursor()
-        cursor.execute("Insert into user values(NULL, ?,?)",(data['username'],data['password']))
-        conn.commit()
-        conn.close()
+        # conn = sqlite3.connect('user.db')
+        # cursor = conn.cursor()
+        # cursor.execute("Insert into user values(NULL, ?,?)",(data['username'],data['password']))
+        # conn.commit()
+        # conn.close
+        user = UserModel(**data)
+        user.save_to_db()
         return {"message":"User is created successfully"},201
 
